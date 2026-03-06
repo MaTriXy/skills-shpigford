@@ -22,6 +22,7 @@ git clone https://github.com/Shpigford/skills.git ~/.skills/shpigford
 | [chat-widget](#chat-widget) | Build real-time support chat with floating widget |
 | [conductor-setup](#conductor-setup) | Configure Rails projects for Conductor |
 | [favicon](#favicon) | Generate favicon sets from source images |
+| [feature-image](#feature-image) | Generate branded social media images for feature announcements |
 | [issues](#issues) | Create, list, and view GitHub issues |
 | [new-rails-project](#new-rails-project) | Create opinionated Rails 8 + React projects |
 | [readme](#readme) | Generate comprehensive project documentation |
@@ -147,6 +148,32 @@ Generate a complete set of favicons from a source image. Auto-detects project ty
 
 ```
 /favicon assets/icon.svg
+```
+
+---
+
+### feature-image
+
+Generate branded social media images for announcing features or updates. Analyzes git history to detect what changed, auto-detects brand from your codebase (Tailwind, CSS vars, design tokens), and captures via Playwright.
+
+**Features:**
+- Git-aware: auto-detects recent feature work from commits, diffs, and branch names
+- Deep brand analysis: studies marketing pages, OG images, color palettes, typography, and visual patterns
+- Three visual styles: stylized mockup, screenshot + overlay, or abstract/illustrative
+- Multiple platform sizes: Twitter/X, LinkedIn, Instagram, Open Graph
+
+**Requires:** Playwright (`npx playwright install chromium`)
+
+**Triggers:** "feature image", "announcement graphic", "social image for feature"
+
+**Example usage:**
+
+```
+/feature-image dark mode support
+```
+
+```
+Generate a social image for the new feature
 ```
 
 ---
