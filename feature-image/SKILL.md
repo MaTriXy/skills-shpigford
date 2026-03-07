@@ -236,7 +236,9 @@ Use this brief as your guide for every design decision in the image. Every eleme
 
 ## Phase 7: Build the HTML Image Page
 
-Create a self-contained HTML file at `/tmp/feature-image-page.html` that:
+**Unique temp files:** To avoid race conditions when multiple agents run in parallel, generate a slug-based ID for this run. Format: `{project-slug}-{feature-slug}-{short-id}` where project slug comes from the directory name or package.json name, feature slug is a 2-3 word kebab-case summary of the feature, and short ID is 4-6 random alphanumeric chars. Example: `baremetrics-dark-mode-a3f2`. Use this slug in all temp file paths below (shown as `[UNIQUE_ID]`). Both the HTML file and the capture script must use the same slug.
+
+Create a self-contained HTML file at `/tmp/feature-image-[UNIQUE_ID]-page.html` that:
 
 1. **Is exactly the chosen dimensions** (viewport-sized, no scroll)
 2. **Embeds all styles inline** (no external CSS dependencies)
@@ -324,7 +326,7 @@ async function capture() {
   const page = await context.newPage();
 
   // Load the HTML file
-  const html = readFileSync('/tmp/feature-image-page.html', 'utf-8');
+  const html = readFileSync('/tmp/feature-image-[UNIQUE_ID]-page.html', 'utf-8');
   await page.setContent(html, { waitUntil: 'networkidle' });
 
   // Wait for fonts to load
@@ -342,10 +344,10 @@ async function capture() {
 capture().catch(console.error);
 ```
 
-Save the script to `/tmp/feature-image-capture.mjs`, run it, then clean up:
+Save the script to `/tmp/feature-image-[UNIQUE_ID]-capture.mjs`, run it, then clean up:
 
 ```bash
-node /tmp/feature-image-capture.mjs && rm /tmp/feature-image-capture.mjs /tmp/feature-image-page.html
+node /tmp/feature-image-[UNIQUE_ID]-capture.mjs && rm /tmp/feature-image-[UNIQUE_ID]-capture.mjs /tmp/feature-image-[UNIQUE_ID]-page.html
 ```
 
 ## Phase 9: Verify & Present
