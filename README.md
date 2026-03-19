@@ -19,6 +19,7 @@ git clone https://github.com/Shpigford/skills.git ~/.skills/shpigford
 | Skill | Description |
 |-------|-------------|
 | [build](#build) | Feature development pipeline - research, plan, track, implement |
+| [but-for-real](#but-for-real) | Force a skeptical second pass on your own work |
 | [chat-widget](#chat-widget) | Build real-time support chat with floating widget |
 | [conductor-setup](#conductor-setup) | Configure Rails projects for Conductor |
 | [favicon](#favicon) | Generate favicon sets from source images |
@@ -76,6 +77,26 @@ Feature development pipeline for building major features. Manages a 4-phase work
 /build implementation chat-interface
 /build progress chat-interface
 /build phase 1 chat-interface
+```
+
+---
+
+### but-for-real
+
+Force a skeptical second pass on your own work. Runs after you've made changes to catch the things you missed — wrong logic, forgotten tests, unused imports, scope creep, and the classic "it should work" without actually running it.
+
+**What it checks:**
+- Did you actually do what was asked (and only what was asked)?
+- Would you approve this if someone else wrote it?
+- What did you forget? (Tests, references, TODOs)
+- Did you run it?
+
+**Triggers:** "but for real", "did that actually work", "review your own work", "check yourself"
+
+**Example usage:**
+
+```
+/but-for-real
 ```
 
 ---
