@@ -2,6 +2,9 @@
 name: feature-image
 argument-hint: [feature description]
 description: "Generate a branded social media image announcing a new feature or update. Analyzes git history, auto-detects brand from codebase (Tailwind, CSS vars, design tokens), replicates UI elements, and captures via Playwright. Use when the user wants to create an announcement image, says 'feature image,' 'announcement graphic,' 'social image for feature,' or wants to visually announce a code change."
+metadata:
+  author: Shpigford
+  version: "1.0"
 ---
 
 Generate a branded social media image for announcing a feature or update. The image is built as an HTML page styled to match the project's brand, then screenshotted with Playwright.

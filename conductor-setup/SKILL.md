@@ -5,7 +5,7 @@ allowed-tools: Bash(chmod *), Bash(bundle *), Bash(npm *), Bash(script/server)
 context: fork
 metadata:
   author: Shpigford
-  version: "1.0"
+  version: "1.1"
 ---
 
 Set up this Rails project for Conductor, the Mac app for parallel coding agents.
@@ -55,7 +55,12 @@ Create the `script` directory if needed, then create `script/server` if it doesn
 
 # === Port Configuration ===
 export PORT=${CONDUCTOR_PORT:-3000}
+export WEB_PORT=$PORT
 export VITE_RUBY_PORT=$((PORT + 1000))
+
+# === SSR Port (for Inertia SSR server) ===
+export INERTIA_SSR_PORT=$((PORT + 100))
+export INERTIA_SSR_URL="http://localhost:${INERTIA_SSR_PORT}"
 
 # === Redis Isolation ===
 if [ -n "$CONDUCTOR_WORKSPACE_NAME" ]; then
@@ -97,6 +102,23 @@ config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', 'redis://
 If this file exists and configures a Redis cache store, update to use:
 ```ruby
 Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0'))
+```
+
+### config/initializers/inertia_rails.rb (SSR)
+If this file exists and configures SSR, ensure the SSR URL reads from the environment:
+```ruby
+config.ssr_url = ENV.fetch('INERTIA_SSR_URL', 'http://localhost:13714')
+```
+
+### SSR entry point (e.g. app/frontend/ssr/ssr.tsx)
+If the project uses Inertia SSR with `createServer`, pass the port from the environment:
+```tsx
+const port = Number(process.env.INERTIA_SSR_PORT) || 13714
+
+createServer((page) =>
+  createInertiaApp({ ... }),
+  port,
+)
 ```
 
 # Implementation Notes

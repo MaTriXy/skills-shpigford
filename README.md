@@ -18,64 +18,28 @@ git clone https://github.com/Shpigford/skills.git ~/.skills/shpigford
 
 | Skill | Description |
 |-------|-------------|
-| [build](#build) | Feature development pipeline - research, plan, track, implement |
-| [but-for-real](#but-for-real) | Force a skeptical second pass on your own work |
-| [chat-widget](#chat-widget) | Build real-time support chat with floating widget |
-| [conductor-setup](#conductor-setup) | Configure Rails projects for Conductor |
-| [favicon](#favicon) | Generate favicon sets from source images |
+| [build](#build) | Feature development pipeline with research, planning, and phased implementation |
+| [but-for-real](#but-for-real) | Skeptical self-review that forces verification before declaring victory |
+| [chat-widget](#chat-widget) | Real-time support chat system with user widget and admin dashboard |
+| [conductor-setup](#conductor-setup) | Configure a Rails project for Conductor parallel coding agents |
+| [favicon](#favicon) | Generate a complete favicon set from a source image |
 | [feature-image](#feature-image) | Generate branded social media images for feature announcements |
-| [issues](#issues) | Create, list, and view GitHub issues |
-| [new-rails-project](#new-rails-project) | Create opinionated Rails 8 + React projects |
-| [readme](#readme) | Generate comprehensive project documentation |
-| [screenshots](#screenshots) | Generate marketing screenshots with Playwright |
-
----
-
-### readme
-
-Creates comprehensive README.md documentation for projects. Performs deep codebase exploration before writing, covering:
-
-- Local development setup (step-by-step)
-- Architecture overview with directory structure and data flow
-- Environment variables reference
-- Deployment instructions (auto-detects platform)
-- Troubleshooting common issues
-
-**Triggers:** "write readme", "create readme", "document this project", "project documentation"
-
-**Example usage:**
-
-```
-Write a readme for this project
-```
+| [issues](#issues) | Create, list, and view GitHub issues via the gh CLI |
+| [new-rails-project](#new-rails-project) | Scaffold a new Rails 8 project with Inertia, React, and Vite |
+| [readme](#readme) | Generate absurdly thorough README documentation for any project |
+| [screenshots](#screenshots) | Capture retina-quality marketing screenshots with Playwright |
 
 ---
 
 ### build
 
-Feature development pipeline for building major features. Manages a 4-phase workflow:
+A 4-phase feature development pipeline that walks you through research, implementation planning, progress tracking, and phased execution. Each phase produces documented artifacts (RESEARCH.md, IMPLEMENTATION.md, PROGRESS.md) and uses deep research including web search, documentation lookup, and codebase exploration before writing code.
 
-1. **Research** - Deep exploration of a feature idea
-2. **Implementation** - Create phased implementation plan
-3. **Progress** - Set up progress tracking
-4. **Phase execution** - Implement each phase with tracking
+- Subcommands: `research`, `implementation`, `progress`, `phase`, `status`
 
-**Subcommands:**
-
-```
-/build research [name]        Deep research on a feature idea
-/build implementation [name]  Create phased implementation plan
-/build progress [name]        Set up progress tracking
-/build phase [n] [name]       Execute implementation phase n
-/build status [name]          Show status and next steps
-```
-
-**Example workflow:**
-
-```
+```bash
 /build research chat-interface
 /build implementation chat-interface
-/build progress chat-interface
 /build phase 1 chat-interface
 ```
 
@@ -83,19 +47,9 @@ Feature development pipeline for building major features. Manages a 4-phase work
 
 ### but-for-real
 
-Force a skeptical second pass on your own work. Runs after you've made changes to catch the things you missed — wrong logic, forgotten tests, unused imports, scope creep, and the classic "it should work" without actually running it.
+Forces a ruthless self-review of your own work. Reads the git diff, checks every changed line, hunts for forgotten tests, missed edge cases, dead code, and logic errors. Then actually runs the code to verify it works instead of pattern-matching to "looks correct."
 
-**What it checks:**
-- Did you actually do what was asked (and only what was asked)?
-- Would you approve this if someone else wrote it?
-- What did you forget? (Tests, references, TODOs)
-- Did you run it?
-
-**Triggers:** "but for real", "did that actually work", "review your own work", "check yourself"
-
-**Example usage:**
-
-```
+```bash
 /but-for-real
 ```
 
@@ -103,116 +57,55 @@ Force a skeptical second pass on your own work. Runs after you've made changes t
 
 ### chat-widget
 
-Build a real-time support chat system with a floating widget for users and an admin dashboard for support staff.
+Builds a complete real-time support chat system: a floating widget for end users and an admin dashboard for support staff. Covers data models, WebSocket channels, REST APIs, frontend components (React, Vue, Rails), email notifications, and message deduplication. Includes framework-specific guidance for Rails, React, Next.js, Laravel, and Vue.
 
-**Features:**
-- Floating chat button with unread badge
-- WebSocket-based real-time messaging
-- Admin dashboard with active/archived chat management
-- Email notifications (delayed to avoid spam)
-- Framework-agnostic architecture guide
-
-**Includes:**
-- Data model schemas (chats, messages)
-- API endpoint specifications
-- WebSocket channel implementations
-- Frontend components (React, Vue examples)
-- Framework-specific code (Rails, Laravel, Next.js)
-
-**Triggers:** "add a live chat widget", "build customer support chat", "create real-time messaging"
-
-**Example usage:**
-
-```
-Add a live chat widget to the app
+```bash
+/chat-widget
 ```
 
 ---
 
 ### conductor-setup
 
-Configure a Rails project to work with [Conductor](https://www.conductor.build/), the Mac app for parallel coding agents. Creates:
+Configures a Rails project to work with Conductor, the Mac app for parallel coding agents. Creates `conductor.json`, setup scripts, and a port-aware server script. Updates Redis configuration across Sidekiq, ActionCable, caching, and Rack::Attack to use environment variables for workspace isolation.
 
-- `conductor.json` - Project configuration
-- `bin/conductor-setup` - Setup script for worktrees
-- `script/server` - Server script with port/Redis isolation
-- Updates Rails config files to use `ENV['REDIS_URL']`
-
-**Example usage:**
-
-```
-Set up this project for Conductor
+```bash
+/conductor-setup
 ```
 
 ---
 
 ### favicon
 
-Generate a complete set of favicons from a source image. Auto-detects project type (Rails, Next.js, Vite, static HTML, etc.) and places files in the correct location.
+Generates a complete set of favicons (ICO, PNG, Apple Touch Icon, web manifest icons) from a single source image using ImageMagick. Auto-detects the project framework to place files in the correct static directory and updates the HTML layout with proper link tags.
 
-**Generates:**
-- `favicon.ico` (multi-resolution: 16x16, 32x32, 48x48)
-- `favicon-96x96.png`
-- `apple-touch-icon.png` (180x180)
-- `web-app-manifest-192x192.png`
-- `web-app-manifest-512x512.png`
-- `site.webmanifest`
-- `favicon.svg` (if source is SVG)
+Requires: ImageMagick v7+
 
-**Requires:** ImageMagick v7+ (`brew install imagemagick`)
-
-**Example usage:**
-
-```
-/favicon logo.png
-```
-
-```
-/favicon assets/icon.svg
+```bash
+/favicon path/to/logo.svg
 ```
 
 ---
 
 ### feature-image
 
-Generate branded social media images for announcing features or updates. Analyzes git history to detect what changed, auto-detects brand from your codebase (Tailwind, CSS vars, design tokens), and captures via Playwright.
+Generates branded social media announcement images by analyzing your git history to detect what changed, extracting your brand's colors/fonts/visual patterns from the codebase, building a styled HTML page, and screenshotting it with Playwright. Supports stylized mockup, screenshot+overlay, and abstract styles.
 
-**Features:**
-- Git-aware: auto-detects recent feature work from commits, diffs, and branch names
-- Deep brand analysis: studies marketing pages, OG images, color palettes, typography, and visual patterns
-- Three visual styles: stylized mockup, screenshot + overlay, or abstract/illustrative
-- Multiple platform sizes: Twitter/X, LinkedIn, Instagram, Open Graph
+Requires: Playwright
 
-**Requires:** Playwright (`npx playwright install chromium`)
-
-**Triggers:** "feature image", "announcement graphic", "social image for feature"
-
-**Example usage:**
-
-```
+```bash
 /feature-image dark mode support
-```
-
-```
-Generate a social image for the new feature
 ```
 
 ---
 
 ### issues
 
-Interact with GitHub issues using the `gh` CLI. Create, list, and view issues with guided prompts.
+Interactive GitHub issue management. Create issues with guided title/body/label prompts, list issues with filters (assignee, author, label), or view issue details. Enforces short, scannable titles and detailed bodies.
 
-**Actions:**
-- **Create** - Open new issues with title, body, labels (guides you through bug reports vs features)
-- **List** - View open issues with filters (all, assigned to me, by label)
-- **View** - See details of a specific issue by number
+Requires: `gh` CLI
 
-**Requires:** GitHub CLI (`gh`) authenticated
-
-**Example usage:**
-
-```
+```bash
 /issues
 ```
 
@@ -220,46 +113,35 @@ Interact with GitHub issues using the `gh` CLI. Create, list, and view issues wi
 
 ### new-rails-project
 
-Create a new Rails project with an opinionated modern stack:
+Scaffolds a new Rails 8 project with a full modern stack: Inertia.js + React + Vite + Tailwind CSS + Sidekiq + Redis. Configures UUID primary keys, timestamptz columns, minitest, and RuboCop. Verifies the boilerplate runs via Playwright.
 
-- **Rails 8** with PostgreSQL (UUID primary keys, timestamptz)
-- **Inertia.js + React 19** with TypeScript
-- **Vite 5** for frontend bundling
-- **Tailwind CSS 4**
-- **Sidekiq 8** with Redis for background jobs
-- **Redis** for sessions and caching
-
-Includes testing setup (minitest, mocha, VCR) and code quality tools (RuboCop, Brakeman).
-
-**Example usage:**
-
-```
+```bash
 /new-rails-project my-app
+```
+
+---
+
+### readme
+
+Generates comprehensive README documentation by deeply exploring the codebase first. Covers local setup, architecture (directory structure, request lifecycle, data flow), environment variables, available scripts, testing, deployment (auto-detected platform), and troubleshooting. Writes directly to README.md.
+
+```bash
+/readme
 ```
 
 ---
 
 ### screenshots
 
-Generate marketing-quality screenshots of your app using Playwright. Captures at true HiDPI (2x retina) resolution.
+Captures retina-quality (2x) marketing screenshots using Playwright. Analyzes routes and components to discover screenshottable features, handles authentication with smart form detection, and produces consistently sized HiDPI images ready for Product Hunt, social media, or landing pages.
 
-**Features:**
-- Auto-detects routes and features from your codebase
-- Handles authentication automatically
-- Produces 2880x1800 retina-quality images
-- Supports dark mode, modals, and full-page captures
+Requires: Playwright
 
-**Requires:** Playwright (`npm install -D playwright`)
-
-**Example usage:**
-
-```
+```bash
 /screenshots http://localhost:3000
 ```
 
-```
-Generate screenshots for Product Hunt
-```
+---
 
 ## Compatibility
 

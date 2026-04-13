@@ -4,7 +4,7 @@ description: Feature development pipeline - research, plan, track, and implement
 argument-hint: [subcommand] [name]
 metadata:
   author: Shpigford
-  version: "1.0"
+  version: "1.1"
 ---
 
 Feature development pipeline - research, plan, track, and implement major features.
@@ -248,6 +248,7 @@ Read `docs/{name}/RESEARCH.md` to understand:
 ### Step 5: Design Implementation Phases
 
 Break the research into practical implementation phases. Each phase should:
+- **Deliver something functional and testable** — the user should be able to go use/test what was built after each phase. Combine infrastructure work with the UI or functionality that uses it so every phase produces a shippable result. Never stack multiple infrastructure-only phases in a row.
 - Be independently valuable (deliver something usable)
 - Be small enough to complete in a focused session
 - Build on previous phases
@@ -498,11 +499,28 @@ Read all three documents to fully understand:
 
 ### Step 6: Deep Research on Phase
 
-Before starting implementation:
+Before writing any code, conduct thorough research using parallel sub-agents:
 
-1. **Web search** for specific implementation details relevant to this phase
-2. **Codebase exploration** for relevant existing code
-3. **Use AskUserQuestion** to clarify any ambiguities about the phase requirements
+1. **Web search (required — use Agent tool)**: Launch sub-agents with `WebSearch` to research specific implementation details for this phase. Search for:
+   - Best practices and common patterns for the specific tech/approach
+   - Known pitfalls, gotchas, and edge cases
+   - Recent changes to APIs or libraries you'll be using
+   - Run multiple searches in parallel covering different aspects of the phase
+
+2. **Documentation lookup (required — use Context7 MCP)**: Use `mcp__context7__resolve-library-id` and `mcp__context7__query-docs` to fetch current documentation for any libraries, frameworks, or APIs involved in this phase. Do NOT rely on training data for library specifics — docs change. Look up:
+   - API signatures and configuration options you'll be using
+   - Migration guides if upgrading or integrating new versions
+   - Setup/integration instructions for any new dependencies
+
+3. **Codebase exploration**: Use the Agent tool (Explore type) to understand relevant existing code — patterns, conventions, and integration points for this phase
+
+4. **UI agent (when the phase affects visual design)**: Launch a sub-agent to research visual design implications — layout, visual hierarchy, typography, color, spacing, responsive behavior, animation, and consistency with existing design language. Use the /ui skill when available. The agent should explore the codebase for existing design system components (tokens, shared styles, component libraries) and flag whether the proposed change introduces visual inconsistencies. WebSearch for current design patterns relevant to the UI being built.
+
+5. **UX agent (when the phase affects user-facing behavior)**: Launch a sub-agent to research interaction patterns, user flows, cognitive load, affordances, error states, edge cases, and accessibility (WCAG compliance, keyboard navigation, screen reader behavior). The agent should search the codebase for how similar interactions are handled today and WebSearch for established UX patterns relevant to the problem. Output should include concrete recommendations, not abstract principles.
+
+6. **Delight agent (when the phase touches anything a user sees or interacts with)**: Launch a sub-agent to research opportunities to make this change feel genuinely good — micro-interactions, smart defaults, helpful empty states, smooth transitions. The agent should search the codebase for existing delight patterns (animations, transitions, contextual feedback). The bar: would a user notice and think "nice"? Delight is the absence of friction plus a moment of care. Skip anything that adds complexity without genuine user payoff.
+
+7. **Use AskUserQuestion** to clarify any ambiguities about the phase requirements
 
 ### Step 7: Execute Phase Work
 
@@ -619,6 +637,10 @@ Keep PROGRESS.md updated in real-time during phase work:
 - Record decisions as they're made
 - Note blockers immediately
 - This creates valuable context for future sessions
+
+### Functional Phases First
+
+Every phase should produce something the user can see, test, or use. If a phase requires infrastructure (data models, APIs, services), bundle the minimum viable UI or integration that exercises it. The litmus test: "Can the user do something new after this phase?" If the answer is no, merge it with the next phase or restructure. Back-to-back phases that are all plumbing with no user-facing result are a planning smell — fix the plan, don't ship scaffolding.
 
 ### Scope Management
 
