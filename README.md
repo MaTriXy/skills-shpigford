@@ -27,6 +27,7 @@ git clone https://github.com/Shpigford/skills.git ~/.skills/shpigford
 | [issues](#issues) | Create, list, and view GitHub issues via the gh CLI |
 | [learnings](#learnings) | Pre-commit sweep for session insights worth codifying in CLAUDE.md or README.md |
 | [new-rails-project](#new-rails-project) | Scaffold a new Rails 8 project with Inertia, React, and Vite |
+| [research](#research) | Deep research before planning — parallel agents search docs, web, and codebase |
 | [readme](#readme) | Generate absurdly thorough README documentation for any project |
 | [screenshots](#screenshots) | Capture retina-quality marketing screenshots with Playwright |
 
@@ -130,6 +131,19 @@ Scaffolds a new Rails 8 project with a full modern stack: Inertia.js + React + V
 
 ```bash
 /new-rails-project my-app
+```
+
+---
+
+### research
+
+Deep research skill that runs before planning or implementation. Clarifies ambiguities with the user first, then launches parallel sub-agents to search the codebase, official docs (via Context7), and the web. Synthesizes findings into a structured output with evidence, sources, downsides, and a recommendation — then flows into Plan mode.
+
+- Agents: codebase, docs, web, dependencies, UI, UX, delight (matched to problem complexity)
+
+```bash
+/research how should we handle webhook retries
+/research why is the dashboard slow on mobile
 ```
 
 ---
