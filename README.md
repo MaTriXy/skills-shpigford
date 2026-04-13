@@ -25,6 +25,7 @@ git clone https://github.com/Shpigford/skills.git ~/.skills/shpigford
 | [favicon](#favicon) | Generate a complete favicon set from a source image |
 | [feature-image](#feature-image) | Generate branded social media images for feature announcements |
 | [issues](#issues) | Create, list, and view GitHub issues via the gh CLI |
+| [learnings](#learnings) | Pre-commit sweep for session insights worth codifying in CLAUDE.md or README.md |
 | [new-rails-project](#new-rails-project) | Scaffold a new Rails 8 project with Inertia, React, and Vite |
 | [readme](#readme) | Generate absurdly thorough README documentation for any project |
 | [screenshots](#screenshots) | Capture retina-quality marketing screenshots with Playwright |
@@ -107,6 +108,18 @@ Requires: `gh` CLI
 
 ```bash
 /issues
+```
+
+---
+
+### learnings
+
+Pre-commit sweep that reviews the current session's code changes, user corrections, and discoveries to identify anything worth codifying in CLAUDE.md or README.md. Applies a high bar — most sessions produce nothing worth adding, and that's a valid outcome. Proposes edits but never writes to load-bearing files without approval.
+
+Triggers: "anything learned?", "anything to note?", "should we update CLAUDE.md?"
+
+```bash
+/learnings
 ```
 
 ---
